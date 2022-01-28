@@ -1,0 +1,598 @@
+<!--
+    THIS EXAMPLE WAS DOWNLOADED FROM https://echarts.apache.org/examples/zh/editor.html?c=effectScatter-bmap&version=5.2.2
+-->
+<!DOCTYPE html>
+<html style="height: 100%">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body style="height: 100%; margin: 0">
+        <div id="container" style="height: 100%"></div>
+
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
+        <!-- Uncomment this line if you want to dataTool extension
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/extension/dataTool.min.js"></script>
+        -->
+        <!-- Uncomment this line if you want to use gl extension
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+        -->
+        <!-- Uncomment this line if you want to echarts-stat extension
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
+        -->
+        
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/map/js/china.js"></script>
+        
+        
+        <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=2hC0H6SN0l7O5wRkYgCTorQToyY4gOBl"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/extension/bmap.min.js"></script>
+        
+
+        <script type="text/javascript">
+          var dom = document.getElementById("container");
+          var myChart = echarts.init(dom);
+          var app = {};
+
+          var option;
+
+
+
+          const data = [
+          { name: 'Anqing', value : 2 },
+          { name: 'Bengbu', value : 1 },
+          { name: 'Chuzhou', value : 1 },
+          { name: 'Fuyang', value : 1 },
+          { name: 'Hefei', value : 17 },
+          { name: 'Huainan', value : 2 },
+          { name: 'Huangshan', value : 1 },
+          { name: 'LuAn', value : 1 },
+          { name: 'Tongling', value : 2 },
+          { name: 'Wuhu', value : 1 },
+          { name: 'Xuancheng', value : 1 },
+          { name: 'Macao', value : 1 },
+          { name: 'Beijing', value : 347 },
+          { name: 'Fuzhou', value : 26 },
+          { name: 'Longyan', value : 1 },
+          { name: 'Nanping', value : 3 },
+          { name: 'Ningde', value : 2 },
+          { name: 'Quanzhou', value : 5 },
+          { name: 'Xiamen', value : 21 },
+          { name: 'Dingxi', value : 1 },
+          { name: 'Lanzhou', value : 7 },
+          { name: 'Wuwei', value : 1 },
+          { name: 'Zhangye', value : 1 },
+          { name: 'Chaozhou', value : 1 },
+          { name: 'Dongguan', value : 5 },
+          { name: 'Foshan', value : 17 },
+          { name: 'Guangzhou', value : 94 },
+          { name: 'Heyuan', value : 1 },
+          { name: 'Huizhou', value : 1 },
+          { name: 'Jiangmen', value : 3 },
+          { name: 'Jieyang', value : 4 },
+          { name: 'Maoming', value : 1 },
+          { name: 'Shantou', value : 2 },
+          { name: 'Shaoguan', value : 1 },
+          { name: 'Shenzhen', value : 140 },
+          { name: 'Zhanjiang', value : 2 },
+          { name: 'Zhaoqing', value : 2 },
+          { name: 'Zhongshan', value : 8 },
+          { name: 'Zhuhai', value : 10 },
+          { name: 'Baise', value : 1 },
+          { name: 'Guilin', value : 5 },
+          { name: 'Liuzhou', value : 2 },
+          { name: 'Nanning', value : 3 },
+          { name: 'Yulin', value : 1 },
+          { name: 'Bijie', value : 3 },
+          { name: 'Guiyang', value : 8 },
+          { name: 'Zunyi', value : 1 },
+          { name: 'Haikou', value : 2 },
+          { name: 'Sanya', value : 1 },
+          { name: 'Baoding', value : 2 },
+          { name: 'Cangzhou', value : 1 },
+          { name: 'Langfang', value : 3 },
+          { name: 'Qinhuangdao', value : 5 },
+          { name: 'Shijiazhuang', value : 13 },
+          { name: 'Tangshan', value : 5 },
+          { name: 'Jiaozuo', value : 1 },
+          { name: 'Kaifeng', value : 5 },
+          { name: 'Luoyang', value : 3 },
+          { name: 'Luohe', value : 1 },
+          { name: 'Nanyang', value : 3 },
+          { name: 'Pingdingshan', value : 1 },
+          { name: 'Puyang', value : 1 },
+          { name: 'Sanmenxia', value : 1 },
+          { name: 'Xinxiang', value : 3 },
+          { name: 'Xuchang', value : 3 },
+          { name: 'Zhengzhou', value : 25 },
+          { name: 'Zhumadian', value : 1 },
+          { name: 'Harbin', value : 9 },
+          { name: 'Heihe', value : 1 },
+          { name: 'Suihua', value : 1 },
+          { name: 'Huanggang', value : 2 },
+          { name: 'Huangshi', value : 1 },
+          { name: 'Jingmen', value : 2 },
+          { name: 'Suizhou', value : 1 },
+          { name: 'Wuhan', value : 48 },
+          { name: 'Xiangyang', value : 1 },
+          { name: 'Xiaogan', value : 1 },
+          { name: 'Yichang', value : 4 },
+          { name: 'Changde', value : 1 },
+          { name: 'Shaoyang', value : 1 },
+          { name: 'Xiangtan', value : 3 },
+          { name: 'Yiyang', value : 1 },
+          { name: 'Yueyang', value : 1 },
+          { name: 'Changsha', value : 37 },
+          { name: 'Zhuzhou', value : 3 },
+          { name: 'Jilin', value : 2 },
+          { name: 'Songyuan', value : 1 },
+          { name: 'Tonghua', value : 1 },
+          { name: 'Yanbian', value : 1 },
+          { name: 'Changchun', value : 10 },
+          { name: 'Changzhou', value : 4 },
+          { name: 'Huaian', value : 3 },
+          { name: 'Lianyungang', value : 1 },
+          { name: 'Nanjing', value : 70 },
+          { name: 'Nantong', value : 10 },
+          { name: 'Suzhou', value : 43 },
+          { name: 'Wuxi', value : 6 },
+          { name: 'Xuzhou', value : 3 },
+          { name: 'Yancheng', value : 2 },
+          { name: 'Yangzhou', value : 6 },
+          { name: 'Zhenjiang', value : 4 },
+          { name: 'Ganzhou', value : 5 },
+          { name: 'JiAn', value : 1 },
+          { name: 'Jingdezhen', value : 1 },
+          { name: 'Jiujiang', value : 1 },
+          { name: 'Nanchang', value : 12 },
+          { name: 'Yichun', value : 1 },
+          { name: 'Yingtan', value : 1 },
+          { name: 'Dalian', value : 15 },
+          { name: 'Dandong', value : 3 },
+          { name: 'Shenyang', value : 16 },
+          { name: 'Bayannur', value : 1 },
+          { name: 'Baotou', value : 4 },
+          { name: 'Chifeng', value : 2 },
+          { name: 'Ordos', value : 1 },
+          { name: 'Hohhot', value : 4 },
+          { name: 'Tongliao', value : 1 },
+          { name: 'Guyuan', value : 1 },
+          { name: 'Yinchuan', value : 1 },
+          { name: 'Dezhou', value : 2 },
+          { name: 'Heze', value : 1 },
+          { name: 'Jinan', value : 16 },
+          { name: 'Jining', value : 4 },
+          { name: 'Liaocheng', value : 1 },
+          { name: 'Linyi', value : 5 },
+          { name: 'Qingdao', value : 17 },
+          { name: 'Rizhao', value : 1 },
+          { name: 'Weihai', value : 4 },
+          { name: 'Weifang', value : 3 },
+          { name: 'Yantai', value : 4 },
+          { name: 'Zibo', value : 4 },
+          { name: 'Datong', value : 2 },
+          { name: 'Jinzhong', value : 1 },
+          { name: 'Taiyuan', value : 15 },
+          { name: 'Xinzhou', value : 2 },
+          { name: 'Yuncheng', value : 2 },
+          { name: 'Changzhi', value : 1 },
+          { name: 'Weinan', value : 1 },
+          { name: 'XiAn', value : 55 },
+          { name: 'Xianyang', value : 1 },
+          { name: 'YanAn', value : 1 },
+          { name: 'Yulin', value : 1 },
+          { name: 'Shanghai', value : 487 },
+          { name: 'Chengdu', value : 59 },
+          { name: 'Dazhou', value : 1 },
+          { name: 'Deyang', value : 1 },
+          { name: 'GuangAn', value : 1 },
+          { name: 'Leshan', value : 1 },
+          { name: 'Meishan', value : 1 },
+          { name: 'Mianyang', value : 3 },
+          { name: 'Suining', value : 1 },
+          { name: 'YaAn', value : 1 },
+          { name: 'Xinzhu', value : 1 },
+          { name: 'Tianjin', value : 31 },
+          { name: 'Hongkong', value : 13 },
+          { name: 'Akesu', value : 1 },
+          { name: 'Urumqi', value : 8 },
+          { name: 'Yili', value : 1 },
+          { name: 'Dali', value : 2 },
+          { name: 'Kunming', value : 9 },
+          { name: 'Hangzhou', value : 109 },
+          { name: 'Huzhou', value : 3 },
+          { name: 'Jiaxing', value : 12 },
+          { name: 'Jinhua', value : 2 },
+          { name: 'Ningbo', value : 21 },
+          { name: 'Shaoxing', value : 6 },
+          { name: 'Taizhou', value : 4 },
+          { name: 'Wenzhou', value : 9 },
+          { name: 'Zhoushan', value : 1 },
+          { name: 'Chongqing', value : 38 }
+          ];
+          const geoCoordMap = {
+            Anqing: [117.058738772,30.5378978174],
+            Bengbu: [117.357079866,32.9294989067],
+            Chuzhou: [118.324570351,32.3173505954],
+            Fuyang: [115.820932259,32.9012113306],
+            Hefei: [117.282699092,31.8669422607],
+            Huainan: [117.018638863,32.6428118237],
+            Huangshan: [118.293569632,29.7344348562],
+            LuAn: [116.505252683,31.7555583552],
+            Tongling: [117.819428729,30.9409296947],
+            Wuhu: [118.384108423,31.3660197875],
+            Xuancheng: [118.752096311,30.9516423543],
+            Macao: [113.5494,22.19295],
+            Beijing: [116.4551,40.2539],
+            Fuzhou: [119.330221107,26.0471254966],
+            Longyan: [117.017996739,25.0786854335],
+            Nanping: [118.181882949,26.6436264742],
+            Ningde: [119.54208215,26.6565274192],
+            Quanzhou: [118.600362343,24.901652384],
+            Xiamen: [118.103886046,24.4892306125],
+            Dingxi: [104.626637601,35.5860562418],
+            Lanzhou: [103.823305441,36.064225525],
+            Wuwei: [102.640147343,37.9331721429],
+            Zhangye: [100.459891869,38.939320297],
+            Chaozhou: [116.630075991,23.6618116765],
+            Dongguan: [113.763433991,23.0430238154],
+            Foshan: [113.134025635,23.0350948405],
+            Guangzhou: [113.307649675,23.1200491021],
+            Heyuan: [114.713721476,23.7572508505],
+            Huizhou: [114.41065808,23.1135398524],
+            Jiangmen: [113.078125341,22.5751167835],
+            Jieyang: [116.379500855,23.5479994669],
+            Maoming: [110.931245331,21.6682257188],
+            Shantou: [116.728650288,23.3839084533],
+            Shaoguan: [113.594461107,24.8029603119],
+            Shenzhen: [114.025973657,22.5460535462],
+            Zhanjiang: [110.365067263,21.2574631038],
+            Zhaoqing: [112.47965337,23.0786632829],
+            Zhongshan: [113.422060021,22.5451775145],
+            Zhuhai: [113.562447026,22.2569146461],
+            Baise: [106.631821404,23.9015123679],
+            Guilin: [110.260920147,25.262901246],
+            Liuzhou: [109.42240181,24.3290533525],
+            Nanning: [108.297233556,22.8064929356],
+            Yulin: [110.151676316,22.6439736084],
+            Bijie: [105.333323371,27.4085621313],
+            Guiyang: [106.709177096,26.6299067414],
+            Zunyi: [106.931260316,27.6999613771],
+            Haikou: [110.330801848,20.022071277],
+            Sanya: [109.522771281,18.2577759149],
+            Baoding: [115.494810169,38.886564548],
+            Cangzhou: [116.863806476,38.2976153503],
+            Langfang: [116.703602223,39.5186106251],
+            Qinhuangdao: [119.604367616,39.9454615659],
+            Shijiazhuang: [114.522081844,38.0489583146],
+            Tangshan: [118.183450598,39.6505309225],
+            Jiaozuo: [113.211835885,35.234607555],
+            Kaifeng: [114.351642118,34.8018541758],
+            Luoyang: [112.447524769,34.6573678177],
+            Luohe: [114.0460614,33.5762786885],
+            Nanyang: [112.542841901,33.0114195691],
+            Pingdingshan: [113.300848978,33.7453014565],
+            Puyang: [115.026627441,35.7532978882],
+            Sanmenxia: [111.181262093,34.7833199411],
+            Xinxiang: [113.912690161,35.3072575577],
+            Xuchang: [113.83531246,34.0267395887],
+            Zhengzhou: [113.64964385,34.7566100641],
+            Zhumadian: [114.049153547,32.9831581541],
+            Harbin: [126.657716855,45.7732246332],
+            Heihe: [127.500830295,50.2506900907],
+            Suihua: [126.989094572,46.646063927],
+            Huanggang: [114.906618047,30.4461089379],
+            Huangshi: [115.050683164,30.2161271277],
+            Jingmen: [112.217330299,31.0426112029],
+            Suizhou: [113.379358364,31.7178576082],
+            Wuhan: [114.316200103,30.5810841269],
+            Xiangyang: [112.250092848,32.2291685915],
+            Xiaogan: [113.935734392,30.9279547842],
+            Yichang: [111.310981092,30.732757818],
+            Changde: [111.653718137,29.0121488552],
+            Shaoyang: [111.461525404,27.2368112449],
+            Xiangtan: [112.935555633,27.835095053],
+            Yiyang: [112.366546645,28.5880877799],
+            Yueyang: [113.146195519,29.3780070755],
+            Changsha: [112.979352788,28.2134782309],
+            Zhuzhou: [113.131695341,27.8274329277],
+            Jilin: [126.564543989,43.8719883344],
+            Songyuan: [124.832994532,45.1360489701],
+            Tonghua: [125.942650139,41.7363971299],
+            Yanbian: [129.485901958,42.8964136037],
+            Changchun: [125.313642427,43.8983376071],
+            Changzhou: [119.981861013,31.7713967447],
+            Huaian: [119.030186365,33.6065127393],
+            Lianyungang: [119.173872217,34.601548967],
+            Nanjing: [118.778074408,32.0572355018],
+            Nantong: [120.873800951,32.0146645408],
+            Suzhou: [120.619907115,31.317987368],
+            Wuxi: [120.305455901,31.5700374519],
+            Xuzhou: [117.188106623,34.2715534311],
+            Yancheng: [120.148871818,33.3798618771],
+            Yangzhou: [119.427777551,32.4085052546],
+            Zhenjiang: [119.455835405,32.2044094436],
+            Ganzhou: [114.935909079,25.8452955363],
+            JiAn: [114.992038711,27.1138476502],
+            Jingdezhen: [117.186522625,29.3035627684],
+            Jiujiang: [115.999848022,29.7196395261],
+            Nanchang: [115.893527546,28.6895780001],
+            Yichun: [114.400038672,27.8111298958],
+            Yingtan: [117.035450186,28.2413095972],
+            Dalian: [121.593477781,38.9487099383],
+            Dandong: [124.338543115,40.1290228266],
+            Shenyang: [123.432790922,41.8086447835],
+            Bayannur: [107.42380672,40.7691799024],
+            Baotou: [109.846238532,40.6471194257],
+            Chifeng: [118.930761192,42.2971123203],
+            Ordos: [109.993706251,39.8164895606],
+            Hohhot: [111.66035052,40.8283188731],
+            Tongliao: [122.260363263,43.633756073],
+            Guyuan: [106.285267996,36.0215234807],
+            Yinchuan: [106.206478608,38.5026210119],
+            Dezhou: [116.328161364,37.4608259263],
+            Heze: [115.463359775,35.2624404961],
+            Jinan: [117.024967066,36.6827847272],
+            Jining: [116.600797625,35.4021216643],
+            Liaocheng: [115.986869139,36.4558285147],
+            Linyi: [118.340768237,35.0724090744],
+            Qingdao: [120.384428184,36.1052149013],
+            Rizhao: [119.507179943,35.4202251931],
+            Weihai: [122.093958366,37.5287870813],
+            Weifang: [119.142633823,36.7161148731],
+            Yantai: [121.30955503,37.5365615629],
+            Zibo: [118.059134278,36.8046848542],
+            Datong: [113.290508673,40.1137444997],
+            Jinzhong: [112.7385144,37.6933615268],
+            Taiyuan: [112.550863589,37.890277054],
+            Xinzhou: [112.727938829,38.461030573],
+            Yuncheng: [111.006853653,35.0388594798],
+            Changzhi: [113.120292086,36.2016643857],
+            Weinan: [109.483932697,34.5023579758],
+            XiAn: [108.953098279,34.2777998978],
+            Xianyang: [108.707509278,34.345372996],
+            YanAn: [109.500509757,36.6033203523],
+            Yulin: [109.745925744,38.2794392401],
+            Shanghai: [121.4801,31.23630],
+            Chengdu: [104.067923463,30.6799428454],
+            Dazhou: [107.494973447,31.2141988589],
+            Deyang: [104.402397818,31.1311396527],
+            GuangAn: [106.635720331,30.4639838879],
+            Leshan: [103.760824239,29.6009576111],
+            Meishan: [103.841429563,30.0611150799],
+            Mianyang: [104.705518975,31.5047012581],
+            Suining: [105.564887792,30.5574913504],
+            YaAn: [103.009356466,29.9997163371],
+            Xinzhu: [121.51561,25.050003],
+            Tianjin: [117.4219,39.4189],
+            Hongkong: [114.173291988,22.3072458588],
+            Hongkong: [114.183870524,22.2721034276],
+            Hongkong: [114.146701965,22.4274312754],
+            Akesu: [80.2698461793,41.1717309015],
+            Urumqi: [87.5649877411,43.8403803472],
+            Yili: [81.2978535304,43.9222480963],
+            Dali: [100.223674789,25.5968996394],
+            Kunming: [102.714601139,25.0491531005],
+            Hangzhou: [120.219375416,30.2592444615],
+            Huzhou: [120.137243163,30.8779251557],
+            Jiaxing: [120.760427699,30.7739922396],
+            Jinhua: [119.652575704,29.1028991054],
+            Ningbo: [121.579005973,29.8852589659],
+            Shaoxing: [120.592467386,30.0023645805],
+            Taizhou: [121.440612936,28.6682832857],
+            Wenzhou: [120.690634734,28.002837594],
+            Zhoushan: [122.169872098,30.0360103026],
+            Chongqing: [106.5580,29.56914]
+          };
+          const convertData = function (data) {
+            var res = [];
+            for (var i = 0; i < data.length; i++) {
+              var geoCoord = geoCoordMap[data[i].name];
+              if (geoCoord) {
+                res.push({
+                  name: data[i].name,
+                  value: geoCoord.concat(data[i].value)
+                });
+              }
+            }
+            return res;
+          };
+          option = {
+            title: {
+              text: 'Podcast China 2021',
+              subtext: 'data from PODFESTCHINA',
+              sublink: 'https://podfestchina.com/en/home-en/',
+              left: 'center'
+            },
+            tooltip: {
+              trigger: 'item'
+            },
+            bmap: {
+              center: [104.114129, 37.550339],
+              zoom: 5,
+              roam: true,
+              mapStyle: {
+                styleJson: [
+                  {
+                    featureType: 'water',
+                    elementType: 'all',
+                    stylers: {
+                      color: '#d1d1d1'
+                    }
+                  },
+                  {
+                    featureType: 'land',
+                    elementType: 'all',
+                    stylers: {
+                      color: '#f3f3f3'
+                    }
+                  },
+                  {
+                    featureType: 'railway',
+                    elementType: 'all',
+                    stylers: {
+                      visibility: 'off'
+                    }
+                  },
+                  {
+                    featureType: 'highway',
+                    elementType: 'all',
+                    stylers: {
+                      color: '#fdfdfd'
+                    }
+                  },
+                  {
+                    featureType: 'highway',
+                    elementType: 'labels',
+                    stylers: {
+                      visibility: 'off'
+                    }
+                  },
+                  {
+                    featureType: 'arterial',
+                    elementType: 'geometry',
+                    stylers: {
+                      color: '#fefefe'
+                    }
+                  },
+                  {
+                    featureType: 'arterial',
+                    elementType: 'geometry.fill',
+                    stylers: {
+                      color: '#fefefe'
+                    }
+                  },
+                  {
+                    featureType: 'poi',
+                    elementType: 'all',
+                    stylers: {
+                      visibility: 'off'
+                    }
+                  },
+                  {
+                    featureType: 'green',
+                    elementType: 'all',
+                    stylers: {
+                      visibility: 'off'
+                    }
+                  },
+                  {
+                    featureType: 'subway',
+                    elementType: 'all',
+                    stylers: {
+                      visibility: 'off'
+                    }
+                  },
+                  {
+                    featureType: 'manmade',
+                    elementType: 'all',
+                    stylers: {
+                      color: '#d1d1d1'
+                    }
+                  },
+                  {
+                    featureType: 'local',
+                    elementType: 'all',
+                    stylers: {
+                      color: '#d1d1d1'
+                    }
+                  },
+                  {
+                    featureType: 'arterial',
+                    elementType: 'labels',
+                    stylers: {
+                      visibility: 'off'
+                    }
+                  },
+                  {
+                    featureType: 'boundary',
+                    elementType: 'all',
+                    stylers: {
+                      color: '#fefefe'
+                    }
+                  },
+                  {
+                    featureType: 'building',
+                    elementType: 'all',
+                    stylers: {
+                      color: '#d1d1d1'
+                    }
+                  },
+                  {
+                    featureType: 'label',
+                    elementType: 'labels.text.fill',
+                    stylers: {
+                      color: '#999999'
+                    }
+                  }
+                ]
+              }
+            },
+            series: [
+              {
+                name: 'Number of listeners',
+                type: 'scatter',
+                coordinateSystem: 'bmap',
+                data: convertData(data),
+                symbolSize: function (val) {
+                  return val[2] / 10;
+                },
+                encode: {
+                  value: 2
+                },
+                label: {
+                  formatter: '{b}',
+                  position: 'right',
+                  show: false,
+                },
+                emphasis: {
+                  label: {
+                    show: true
+                  }
+                }
+              },
+              {
+                name: 'Top 5',
+                type: 'effectScatter',
+                coordinateSystem: 'bmap',
+                data: convertData(
+                  data
+                    .sort(function (a, b) {
+                      return b.value - a.value;
+                    })
+                    .slice(0, 5)
+                ),
+                symbolSize: function (val) {
+                  return val[2] / 10;
+                },
+                encode: {
+                  value: 2
+                },
+                showEffectOn: 'render',
+                rippleEffect: {
+                  brushType: 'stroke'
+                },
+                label: {
+                  formatter: '{b}',
+                  position: 'right',
+                  show: true
+                },
+                itemStyle: {
+                  color: '#8a2be2',
+                  shadowBlur: 10,
+                  shadowColor: '#333'
+                },
+                emphasis: {
+                  scale: true
+                },
+                zlevel: 1
+              }
+            ]
+          };
+
+          if (option && typeof option === 'object') {
+              myChart.setOption(option);
+          }
+
+        </script>
+    </body>
+</html>
+    
